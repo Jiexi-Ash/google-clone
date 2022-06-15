@@ -15,7 +15,7 @@ function Search({ results }) {
       </Head>
 
       <SearchHeader />
-      <SearchResults about={results.searchInformation} />
+      <SearchResults about={results.searchInformation} items={results.items} />
     </div>
   );
 }
