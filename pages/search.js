@@ -2,16 +2,20 @@ import Head from "next/head";
 import SearchHeader from "../components/SearchHeader";
 import axios from "axios";
 import Response from "../Response";
+import { useRouter } from "next/router";
+import SearchResults from "../components/SearchResults";
 
 function Search({ results }) {
+  const term = useRouter().query.term;
   console.log(results);
   return (
     <div>
       <Head>
-        <title>Search Page</title>
+        <title>Search - {term}</title>
       </Head>
 
       <SearchHeader />
+      <SearchResults about={results.searchInformation} />
     </div>
   );
 }
