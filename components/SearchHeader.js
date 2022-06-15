@@ -37,7 +37,6 @@ function SearchHeader() {
         >
           <input
             type="text"
-            defaultValue={router.query.term}
             className="w-full focus:outline-none"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
