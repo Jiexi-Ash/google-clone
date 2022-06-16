@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { SearchIcon, MicrophoneIcon } from "@heroicons/react/solid";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Home() {
   const [term, setTerm] = useState("");
@@ -15,6 +16,17 @@ export default function Home() {
 
     if (!term.trim()) return;
     router.push(`/search?term=${term.trim()}&searchType=`);
+  };
+  const handleRandomSearch = async (e) => {
+    e.preventDefault();
+    const url = "https://random-word-api.herokuapp.com/word?number=1";
+    const response = await axios.get(url);
+    console.log(response.data);
+    const randomWord = response.data[0].toString();
+    setTerm(randomWord);
+
+    if (!randomWord) return;
+    router.push(`/search?term=${randomWord}&searchType=`);
   };
   return (
     <div>
@@ -49,7 +61,9 @@ export default function Home() {
         </div>
         <div className="flex flex-col sm:flex-row w-[50%] space-y- mt-8 sm:space-y-0 sm:space-x-4 justify-center">
           <button className="btn">Google Search</button>
-          <button className="btn">{`I'm Feeling lucky`}</button>
+          <button className="btn" onClick={handleRandomSearch}>
+            I&apos;m Feeling lucky
+          </button>
         </div>
       </form>
 
