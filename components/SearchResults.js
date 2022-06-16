@@ -10,7 +10,7 @@ function SearchResults({ about, items }) {
         About {about.formattedTotalResults} results ({about.formattedSearchTime}
         ) seconds
       </p>
-      {items.map((item) => (
+      {items?.map((item) => (
         <div className="max-w-xl mb-8" key={item.link}>
           <div className="group ">
             <a className="text-sm truncate" href={item.link}>

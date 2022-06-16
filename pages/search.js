@@ -4,9 +4,11 @@ import axios from "axios";
 import Response from "../Response";
 import { useRouter } from "next/router";
 import SearchResults from "../components/SearchResults";
+import ImageResults from "../components/ImageResults";
 
 function Search({ results }) {
-  const term = useRouter().query.term;
+  const router = useRouter();
+  const term = router.query.term;
   console.log(results);
   return (
     <div>
@@ -15,7 +17,14 @@ function Search({ results }) {
       </Head>
 
       <SearchHeader />
-      <SearchResults about={results.searchInformation} items={results.items} />
+      {router.query.searchType === "image" ? (
+        <ImageResults results={results} />
+      ) : (
+        <SearchResults
+          about={results.searchInformation}
+          items={results.items}
+        />
+      )}
     </div>
   );
 }
